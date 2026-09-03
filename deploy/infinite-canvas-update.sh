@@ -22,7 +22,7 @@ fi
 
 worktree_status=$(git -C "$repo_root" status --porcelain)
 if [ -n "$worktree_status" ]; then
-    unexpected_status=$(printf '%s\n' "$worktree_status" | grep -v -E '^\?\? (\.deploy-backups/|\.deployed-revision)$' || true)
+    unexpected_status=$(printf '%s\n' "$worktree_status" | grep -v -E '^\?\? (\.deploy-backups/|\.deployed-revision|h3-canvas-bridge/|secrets/)$' || true)
     if [ -n "$unexpected_status" ]; then
         printf '%s\n' "$unexpected_status"
         exit 2
