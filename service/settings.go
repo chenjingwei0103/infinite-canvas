@@ -40,7 +40,12 @@ func UserCanUseRemoteModelChannel(user model.AuthUser) bool {
 
 func AdminSettings() (model.Settings, error) {
 	settings, err := repository.GetSettings()
-	return hidePrivateAPIKeys(normalizeSettings(settings)), err
+	settings = normalizeSettings(settings)
+	settings.Public.ModelChannel.Channels = publicChannelInfos(settings.Private.Channels)
+	if len(settings.Public.ModelChannel.AvailableModels) == 0 {
+		settings.Public.ModelChannel.AvailableModels = enabledChannelModels(settings.Private.Channels)
+	}
+	return hidePrivateAPIKeys(settings), err
 }
 
 func SaveSettings(settings model.Settings) (model.Settings, error) {
