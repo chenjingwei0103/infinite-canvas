@@ -112,7 +112,7 @@ export function InfiniteCanvas({ containerRef, viewport, tool, backgroundMode = 
         if (event.button === 0 && isBackgroundClick && document.activeElement instanceof HTMLElement && (document.activeElement.isContentEditable || document.activeElement instanceof HTMLMediaElement)) document.activeElement.blur();
         const temporaryTool = isSpacePressed;
         const activeTool = temporaryTool ? (tool === "select" ? "pan" : "select") : tool;
-        const shouldPan = event.button === 1 || (event.button === 0 && activeTool === "pan");
+        const shouldPan = event.button === 1 || (event.button === 0 && isBackgroundClick && (activeTool === "pan" || !event.shiftKey));
 
         if (shouldPan) {
             event.preventDefault();
