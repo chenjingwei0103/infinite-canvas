@@ -1,0 +1,11 @@
+[Unit]
+Description=Periodic infinite canvas source update
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Persistent=true
+Unit=infinite-canvas-update.service
+
+[Install]
+WantedBy=timers.target

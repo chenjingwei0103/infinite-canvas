@@ -1,0 +1,8 @@
+[Unit]
+Description=Update infinite canvas from the configured GitHub repository
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/infinite-canvas/deploy/infinite-canvas-update.sh
